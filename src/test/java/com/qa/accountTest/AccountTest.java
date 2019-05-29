@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.qa.app.Account;
+import com.qa.app.AccountRepositoryDB;
 import com.qa.app.AccountRepositoryMap;
 
 public class AccountTest {
@@ -51,6 +52,14 @@ public class AccountTest {
 		arm.add(account);
 		Account retrieved = arm.retrieve(id);
 		assertEquals("Wrong account retrived", "Chris", retrieved.getFirstName());
+	}
+	@Test
+	public void accountRepositoryDBTest() {
+		AccountRepositoryDB db = new AccountRepositoryDB();
+		db.add(account);
+		int id = account.getId();
+		Account retrieved = db.retrieve(id);
+		assertEquals("Wrong account retrived", account, retrieved);
 	}
 
 }

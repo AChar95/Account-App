@@ -37,5 +37,12 @@ EntityTransaction et = em.getTransaction();
 		et.commit();
 		
 	}
+	public void deleteAll() {
+		Account account;
+		for (int i = 0; i<=100; i++) {
+			
+		}
+	}
+		
 
 }

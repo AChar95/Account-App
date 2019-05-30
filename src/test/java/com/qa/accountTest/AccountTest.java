@@ -12,6 +12,10 @@ import com.qa.app.AccountRepositoryMap;
 
 public class AccountTest {
 	private Account account;
+	@BeforeClass
+	public void deleteTable() {
+		AccountRepositoryDB db = new AccountRepositoryDB();
+	}
 	@Before
 	public void beforeTests() {
 		account = new Account();

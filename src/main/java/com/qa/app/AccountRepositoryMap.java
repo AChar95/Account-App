@@ -13,4 +13,14 @@ public class AccountRepositoryMap implements AccountRepository{
 		
 		return maps.get(id);
 	}
+
+	public Account updateFirstName(int id, String newFirstName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

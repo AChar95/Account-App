@@ -3,6 +3,7 @@ package com.qa.accountTest;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.qa.app.Account;
@@ -11,7 +12,6 @@ import com.qa.app.AccountRepositoryMap;
 
 public class AccountTest {
 	private Account account;
-
 	@Before
 	public void beforeTests() {
 		account = new Account();
@@ -60,6 +60,24 @@ public class AccountTest {
 		int id = account.getId();
 		Account retrieved = db.retrieve(id);
 		assertEquals("Wrong account retrived", account, retrieved);
+	}
+	@Test
+	public void accountUpdate() {
+		AccountRepositoryDB db = new AccountRepositoryDB();
+		db.add(account);
+		int id = account.getId();
+		db.updateFirstName(id, "Terry");
+		String firstName = db.retrieve(id).getFirstName();
+		assertEquals("First name update error", "Terry", firstName);
+	}
+	@Test
+	public void accountDelete() {
+		AccountRepositoryDB db = new AccountRepositoryDB();
+		db.add(account);
+		int id = account.getId();
+		Account foundAccount = db.retrieve(id);
+		db.delete(id);
+		assertNull("Entity not deleted", foundAccount );
 	}
 
 }

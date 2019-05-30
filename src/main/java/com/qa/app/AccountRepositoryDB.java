@@ -21,5 +21,21 @@ EntityTransaction et = em.getTransaction();
 		return em.find(Account.class, id);
 		
 	}
+	public Account updateFirstName(int id, String newFirstName) {
+		et.begin();
+		Account foundAccount = retrieve(id);
+		foundAccount.setFirstName(newFirstName);
+		et.commit();
+		return foundAccount;
+		
+		
+	}
+	public void delete(int id) {
+		et.begin();
+		Account deleteAccount = retrieve(id);
+		em.remove(deleteAccount);
+		et.commit();
+		
+	}
 
 }

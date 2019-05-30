@@ -3,15 +3,21 @@ package com.qa.accountTest;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
+/*import org.junit.BeforeClass;*/
 import org.junit.Test;
 
 import com.qa.app.Account;
 import com.qa.app.AccountRepositoryDB;
 import com.qa.app.AccountRepositoryMap;
+import com.qa.app.Task;
 
 public class AccountTest {
 	private Account account;
+	/*@BeforeClass
+	public void deleteAllFunction() {
+		AccountRepositoryDB db = new AccountRepositoryDB();
+		db.deleteAll();
+	}*/
 	@Before
 	public void beforeTests() {
 		account = new Account();
@@ -77,7 +83,30 @@ public class AccountTest {
 		int id = account.getId();
 		Account foundAccount = db.retrieve(id);
 		db.delete(id);
-		assertNull("Entity not deleted", foundAccount );
+		assertNull("Entity not deleted", db.retrieve(id));
+	}
+	@Test
+	public void addTaskToDB() {
+		AccountRepositoryDB db = new AccountRepositoryDB();
+		Account account = new Account();
+		db.add(account);
+		account.setFirstName("Hugo");
+		Task task =new Task();
+		Task taskTwo = new Task();
+		task.setToDo("Dance");
+		taskTwo.setToDo("Dog"); 
+		account.getTasks().add(task);
+		account.getTasks().add(taskTwo);
+		db.createwithTask(account);
+	}
+	@Test
+	public void  retrieveByName() {
+		AccountRepositoryDB db = new AccountRepositoryDB();
+		Account account = new Account();
+		db.add(account);
+		account.setFirstName("Hugo");
+		db.retrieveByName("Hugo");
+		
 	}
 
 }
